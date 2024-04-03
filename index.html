@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/b20ae317e6.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wheatherApp</title>
+    <link rel="icon" href="https://th.bing.com/th/id/R.770b805d5c99c7931366c2e84e88f251?rik=khgO%2bY1Hh3BT9w&riu=http%3a%2f%2fpurepng.com%2fpublic%2fuploads%2flarge%2fpurepng.com-weather-iconsymbolsiconsapple-iosiosios-8-iconsios-8-721522596142qx4ep.png&ehk=6msbAydV7X6D4bO8zvLC664aXwKOdBU17dwrHcKxaAg%3d&risl=&pid=ImgRaw&r=0">
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Rubik+Scribble&display=swap');
+        body{
+             background-image: url('https://assets.materialup.com/uploads/a93a1a9b-8e6e-4114-9963-87158ee79083/preview.gif');
+            background-repeat: no-repeat;
+            background-size: cover; 
+            font-family:cursive;
+        }
+        input{
+            border-radius: 50px;
+            border-color: aquamarine;
+            border-width: 3px;
+            border-style: solid;
+            bottom: none;
+        }
+        
+        button{
+            border-radius: 20px;
+            border-style: ridge;
+            border-color: #b533b5;
+            
+            
+        
+
+        }
+        
+        body{
+
+            border-color: red;
+        
+        }
+        .first{
+            font-family: "Rubik Scribble", system-ui;
+            font-weight: bolder;
+            color:white;
+            font-size: larger;
+        }
+        .two{
+            font-family: "Amaranth", sans-serif;
+            font-weight: 400;
+        
+
+        }
+        h1{
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <center>
+<h1>Weather App</h1>
+<form id="form">
+    <input type="text" placeholder="Enter City" id="input">
+     <button style="color: black;">Submit <i class="fa-solid fa-temperature-high"></i></button>
+</form>
+<div id="cities"></div>
+
+
+</center>
+<script>
+     const form=document.getElementById("form");
+     const input=document.getElementById("input");
+     const info =document.getElementById("cities");
+     const apiKey="d5733e750d4670fa48ce301fbfb71a50";
+     form.addEventListener("click",e=>{
+        e.preventDefault();
+        info.textContent="";
+        const inputValue=input.value;
+        const url=`https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=${apiKey}&units=metric`;
+        fetch(url).then(response=>response.json())
+        .then(data=>{
+               const {main,name}=data;
+               const para=document.createElement("div");
+               para.innerHTML=` <p class="two" style="font-size:15px; color: white "> <i class="fa-solid fa-location-dot"></i> ${name} City</p> <div class="first"> ${Math.round(main.temp)}<sup>0</sup>C</div>`;
+               info.appendChild(para);
+        })
+        // .catch(()=>{
+        //     alert
+
+        // })
+      form.reset();
+     })
+</script>
+</body>
+</html>
